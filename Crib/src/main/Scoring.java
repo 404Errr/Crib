@@ -88,7 +88,6 @@ public class Scoring {
 			}
 		}
 		if (nobs) totalScore+=1;
-		System.out.println(sampleSet);
 		return totalScore;
 	}
 }

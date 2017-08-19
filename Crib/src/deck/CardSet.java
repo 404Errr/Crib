@@ -12,6 +12,7 @@ public class CardSet {
 	}
 
 	public void initDeck() {
+		clear();
 		for (int suit = 0;suit<=3;suit++) {			
 			for (int val = 1;val<=13;val++) {
 				append(new Card(suit, val));
@@ -25,6 +26,10 @@ public class CardSet {
 	
 	public void append(Card card) {
 		cards.add(card);
+	}
+	
+	public void clear() {
+		cards.clear();
 	}
 
 	public List<Card> getCards() {
