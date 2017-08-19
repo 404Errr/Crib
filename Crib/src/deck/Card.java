@@ -2,7 +2,7 @@ package deck;
 
 import main.Data;
 
-public class Card {
+public class Card implements Comparable<Card> {
 	private int suit, val;
 	
 	public Card(int suit, int val) {
@@ -50,5 +50,12 @@ public class Card {
 		case 13: return "K";
 		}
 		return null;
+	}
+
+	@Override
+	public int compareTo(Card that) {
+		if (this.val>that.val) return 1;
+		if (this.val<that.val) return -1;
+		return 0;
 	}
 }
