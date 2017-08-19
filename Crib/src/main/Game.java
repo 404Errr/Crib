@@ -23,6 +23,10 @@ public class Game {
 		System.out.println(deck);
 	}
 	
+	public static void run() { 
+		
+	}
+	
 	public static void cycleDealer() {
 		players.add(players.remove(0));
 	}
