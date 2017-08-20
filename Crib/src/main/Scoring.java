@@ -1,6 +1,5 @@
 package main;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import deck.Card;
@@ -15,7 +14,7 @@ public class Scoring {
 		}
 		sampleSet.append(deckCard);
 		int totalScore = 0;
-		sampleSet.sort();
+		sampleSet.sortByVal();
 		List<Card> sample = sampleSet.getCards();
 		//pairs
 		for (int i = 0;i<sample.size()-1;i++) {

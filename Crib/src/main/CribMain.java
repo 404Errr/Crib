@@ -1,8 +1,5 @@
 package main;
 
-import deck.Card;
-import deck.CardSet;
-
 public class CribMain {
 	public static void main(String[] args) {
 		Game.init();

@@ -11,7 +11,10 @@ public class CardSet {
 		cards = new ArrayList<Card>();
 	}
 
-	public void initDeck() {
+	/**
+	 * sets cardset to 52 playing card deck
+	 */
+	public void makeDeck() {
 		clear();
 		for (int suit = 0;suit<=3;suit++) {			
 			for (int val = 1;val<=13;val++) {
@@ -36,8 +39,28 @@ public class CardSet {
 		return cards;
 	}
 	
-	public void sort() {
+	public void sortByVal() {
 		Collections.sort(cards);
+	}
+	
+	public Card peek() {
+		return cards.get(cards.size()-1);
+	}
+	
+	public Card pop() {
+		return cards.remove(cards.size()-1);
+	}
+	
+	public boolean push(Card card) {
+		return cards.add(card);
+	}
+	
+	public boolean add(Card card) {
+		return cards.add(card);
+	}
+	
+	public Card remove(Object obj) {
+		return remove(obj);
 	}
 	
 	@Override

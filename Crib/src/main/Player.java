@@ -3,8 +3,6 @@ package main;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.net.ssl.HandshakeCompletedEvent;
-
 import deck.CardSet;
 
 public class Player {
@@ -45,13 +43,18 @@ public class Player {
 
 	public void giveToCrib() {
 		while (hand.getCards().size()>4) {
-			int choice = 0;
+			int choice = -1;
 			if (!playerControlled) {
 				choice = new Random().nextInt(hand.getCards().size());
 			}
 			else {
 				System.out.println(hand);
-				choice = new Scanner(System.in).nextInt();
+				@SuppressWarnings("resource")
+				String input = new Scanner(System.in).next();
+				try {
+					choice = Integer.parseInt(input);
+				}
+				catch (Exception e) {}
 			}
 			if (choice<0||choice>=hand.getCards().size()) continue;
 			Game.giveToCrib(hand.getCards().remove(choice));

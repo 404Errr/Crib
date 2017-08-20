@@ -14,6 +14,11 @@ public class Card implements Comparable<Card> {
 		return suit;
 	}
 	
+	public int getPlayVal() {
+		if (val>=10) return 10;
+		return val;
+	}
+	
 	public int getVal() {
 		return val;
 	}
