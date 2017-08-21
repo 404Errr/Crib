@@ -11,7 +11,7 @@ public class Game {
 	private static Card deckCard;
 	private static int curDealer, playCount;
 	private static List<Player> players;//index 0 is dealer
-	
+
 	public static void init() {
 		deck = new CardSet();
 		crib = new CardSet();
@@ -20,8 +20,8 @@ public class Game {
 		players.add(new Player(false));
 //		System.out.println(deck);
 	}
-	
-	public static void run() { 
+
+	public static void run() {
 		do {
 			deck.makeDeck();
 			deck.shuffleSet();
@@ -37,16 +37,19 @@ public class Game {
 			System.out.println("0 "+players.get(0).getHand());
 			System.out.println("1 "+players.get(1).getHand());
 			System.out.println("c "+crib);
-			//flip deck card (cut)
-			deckCard = deck.getCards().remove(0);
+			//cut
+			deckCard = deck.pop();
+			if (deckCard.getVal()==11) {//heels
+				getDealer().addScore(2);
+			}
 			System.out.println(deckCard);
 			//scoring
 			for (int p = 0;p<players.size();p++) {
 				players.get(p).addScore(Scoring.calcHand(deckCard, players.get(p).getHand(), false));
 			}
 			getDealer().addScore(Scoring.calcHand(deckCard, crib, true));
-			System.out.println(players.get(0).getScore());
-			System.out.println(players.get(1).getScore());
+			System.out.println("0 "+players.get(0).getScore());
+			System.out.println("1 "+players.get(1).getScore());
 			cycleDealer();
 		} while (true);
 	}
@@ -119,7 +122,7 @@ public class Game {
 //						playerTwo.setScore(boardPoints(nextBoardSpot));
 //					}
 //				}
-//				System.out.println("***Cleared***");	
+//				System.out.println("***Cleared***");
 //			}
 //			if(!playersTurn){
 //				playerOne.setScore(boardPoints(nextBoardSpot));
@@ -194,7 +197,7 @@ public class Game {
 //		//if not return checkboardpoints if they are add one more card until all used up to find the run amount.
 //		return 0;
 //	}
-//	
+//
 //	public boolean checkPlayable(int[] Hand){
 //		//get the board score
 //		for(int i = 0; i < Hand.length; i++){
@@ -205,33 +208,29 @@ public class Game {
 //		}
 //		return false;
 //	}
-	
+
 	public static void giveToCrib(Card card) {
-		crib.append(card);
+		crib.push(card);
 	}
-	
+
 	public static void cycleDealer() {
 		curDealer++;
 		if (curDealer>players.size()-1) curDealer = 0;
 	}
-	
+
 	public static Player getDealer() {
 		return players.get(curDealer);
 	}
-	
+
 	public static void deal(int handSize) {
 		deck.shuffleSet();
 		for (int p = 0;p<players.size();p++) {
 			players.get(p).resetCards();
-		}
-		for (int i = 0;i<handSize;i++) {
-			for (int p = 0;p<players.size();p++) {
-				players.get(p).getHand().append(deck.getCards().remove(0));
+			for (int i = 0;i<handSize;i++) {
+				players.get(p).getHand().push(deck.pop());
 			}
-		}
-		for (int p = 0;p<players.size();p++) {
 			players.get(p).getHand().sortByVal();
 		}
 	}
-	
+
 }

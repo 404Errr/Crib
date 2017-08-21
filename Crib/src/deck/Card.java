@@ -4,7 +4,7 @@ import main.Data;
 
 public class Card implements Comparable<Card> {
 	private int suit, val;
-	
+
 	public Card(int suit, int val) {
 		this.suit = suit;
 		this.val = val;
@@ -13,12 +13,12 @@ public class Card implements Comparable<Card> {
 	public int getSuit() {
 		return suit;
 	}
-	
-	public int getPlayVal() {
+
+	public int getSVal() {
 		if (val>=10) return 10;
 		return val;
 	}
-	
+
 	public int getVal() {
 		return val;
 	}
@@ -27,7 +27,7 @@ public class Card implements Comparable<Card> {
 	public String toString() {
 		return getSuit(suit)+""+getVal(val);
 	}
-	
+
 	public static String getSuit(int suit) {
 		switch (suit) {
 		case Data.SUIT_SPADE: return "\u2660";
@@ -35,9 +35,9 @@ public class Card implements Comparable<Card> {
 		case Data.SUIT_CLUB: return "\u2663";
 		case Data.SUIT_HEART: return "\u2665";
 		}
-		return "INVALID SUIT";
+		return null;
 	}
-	
+
 	public static String getVal(int val) {
 		switch (val) {
 		case 1: return "A";
