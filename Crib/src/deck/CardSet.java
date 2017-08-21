@@ -1,66 +1,30 @@
 package deck;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.Stack;
 
-public class CardSet {
-	private List<Card> cards;
-
-	public CardSet() {
-		cards = new ArrayList<>();
+@SuppressWarnings("serial")
+public class CardSet extends Stack<Card> {
+	public CardSet(boolean makeAsDeck) {
+		if (makeAsDeck) {
+			resetDeck();
+		}
 	}
-
-	/**
-	 * sets cardset to 52 playing card deck
-	 */
-	public void makeDeck() {
+	public void resetDeck() {
 		clear();
-		for (int suit = 0;suit<=3;suit++) {
+		for (int suit = 0;suit<4;suit++) {
 			for (int val = 1;val<=13;val++) {
 				add(new Card(suit, val));
 			}
 		}
+		Collections.shuffle(this);
 	}
 
-	public void shuffleSet() {
-		Collections.shuffle(cards);
+	public void sort() {
+		Collections.sort(this);
 	}
 
-	public void clear() {
-		cards.clear();
-	}
-
-	public List<Card> getCards() {
-		return cards;
-	}
-
-	public void sortByVal() {
-		Collections.sort(cards);
-	}
-
-	public Card peek() {
-		return cards.get(cards.size()-1);
-	}
-
-	public Card pop() {
-		return cards.remove(cards.size()-1);
-	}
-
-	public boolean push(Card card) {
-		return cards.add(card);
-	}
-
-	public boolean add(Card card) {
-		return cards.add(card);
-	}
-
-	public Card remove(Object obj) {
-		return remove(obj);
-	}
-
-	@Override
-	public String toString() {
-		return cards.toString();
+	public void pushBottom(Card card) {
+		add(0, card);
 	}
 }

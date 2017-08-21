@@ -25,10 +25,10 @@ public class Card implements Comparable<Card> {
 
 	@Override
 	public String toString() {
-		return getSuit(suit)+""+getVal(val);
+		return getSuitStr(suit)+""+getValStr(val);
 	}
 
-	public static String getSuit(int suit) {
+	public static String getSuitStr(int suit) {
 		switch (suit) {
 		case Data.SUIT_SPADE: return "\u2660";
 		case Data.SUIT_DIAMOND: return "\u2666";
@@ -38,7 +38,7 @@ public class Card implements Comparable<Card> {
 		return null;
 	}
 
-	public static String getVal(int val) {
+	public static String getValStr(int val) {
 		switch (val) {
 		case 1: return "A";
 		case 2: return "2";

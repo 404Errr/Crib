@@ -1,21 +1,18 @@
 package main;
 
-import java.util.List;
-
 import deck.Card;
 import deck.CardSet;
 
 public class Scoring {
 
 	public static int calcHand(Card deckCard, CardSet hand, boolean isCrib) {
-		CardSet sampleSet = new CardSet();
+		CardSet sample = new CardSet(false);
 		for (int i = 0;i<4;i++) {
-			sampleSet.add(hand.getCards().get(i));
+			sample.add(hand.get(i));
 		}
-		sampleSet.add(deckCard);
+		sample.add(deckCard);
+		sample.sort();
 		int totalScore = 0;
-		sampleSet.sortByVal();
-		List<Card> sample = sampleSet.getCards();
 		//pairs
 		for (int i = 0;i<5-1;i++) {
 			for (int j = i;j<5;j++) {
@@ -78,13 +75,13 @@ public class Scoring {
 		//flush
 		int matches = 0;
 		for (int i = 1;i<4;i++) {
-			if (hand.getCards().get(i).getSuit()==hand.getCards().get(i-1).getSuit()) {
+			if (hand.get(i).getSuit()==hand.get(i-1).getSuit()) {
 				matches++;
 			}
 		}
 		if (matches==3) {
 			if (!isCrib) totalScore+=4;
-			if (hand.getCards().get(0).getSuit()==deckCard.getSuit()) {
+			if (hand.get(0).getSuit()==deckCard.getSuit()) {
 				if (!isCrib) totalScore+=1;
 				else totalScore+=5;
 			}
@@ -92,12 +89,16 @@ public class Scoring {
 		//nobs
 		boolean nobs = false;
 		for (int i = 0;i<4;i++) {
-			if (hand.getCards().get(i).getVal()==11&&hand.getCards().get(i).getSuit()==deckCard.getSuit()) {
+			if (hand.get(i).getVal()==11&&hand.get(i).getSuit()==deckCard.getSuit()) {
 				nobs = true;
 				break;
 			}
 		}
 		if (nobs) totalScore+=1;
 		return totalScore;
+	}
+
+	public static int playScore(CardSet playHistory) {//TODO
+		return 0;
 	}
 }
